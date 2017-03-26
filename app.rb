@@ -52,3 +52,6 @@ class Hangman < Sinatra::Base
 		erb :play_game, :locals => {player1: backend_p1name, player2: backend_p2name, secret_word: backend_secret_word, guess: backend_guess}
 	end
 end
+
+
+

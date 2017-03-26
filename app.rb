@@ -1,6 +1,6 @@
 require 'sinatra'
 require_relative 'hangman.rb'
-	class Hangman < Sinatra::Base
+class Hangman < Sinatra::Base
 
 
 	get '/' do
@@ -29,7 +29,11 @@ require_relative 'hangman.rb'
 		backend_p2name = params[:p1_name_input]
 		backend_secret_word = params[:word_input]
 		backend_guess = params[:guess_input]
-
+	
+		erb :play_game, :locals => {player1: backend_p1name, player2: backend_p2name, secret_word: backend_secret_word, guess: backend_guess}
 	end
+
+		
+	
 
  end

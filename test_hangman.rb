@@ -26,5 +26,17 @@ class TestHangman < MiniTest::Test
 	 def test_valid_char_with_capital_letters
 	 	word = KeywordClass.new('KEYWORD')
 	 	assert_equal(true, word.valid_characters?)
-	 end 
+	 end
+
+	 def test_guess_wrong
+	 	word = KeywordClass.new('code')
+	 	guess = 'a'
+	 	assert_equal(false, word.guess_letter(guess))
+	 end
+
+	 def test_guess_correct_letter
+	 	word = KeywordClass.new('code')
+	 	guess = 'a'
+	 	assert_equal(false, word.guess_letter(guess))
+	 end
 end

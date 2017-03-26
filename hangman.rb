@@ -1,65 +1,112 @@
 class KeywordClass
 
 
-	attr_accessor :secret_word, :store_word, :wrong
+	attr_accessor :secret_word, :correct_guess, :wrong_guess 
 
 	def initialize(word)
 		@secret_word = word
-		@store_word = store_word
+		@correct_guess = store_word
 		@wrong_guess = 6
 
 	end
 
 	def store_word
-		store_word = Array.new(secret_word.length, '_ ')
+		store_word = Array.new(word.length, '_ ')
 	end
 
 	def valid_characters?
-		secret_word[/[A-Za-z]+$/] == secret_word
+		word[/[A-Za-z]+$/] == word
 		
 	end
 
-	# def guess_letter(guess)
-	# 	secret_word.include?(guess)
+	def guess_include(guess)
+		word.include?(guess)
 
-	# end
+	end
 
-	# def wrong_guess
-	# 	wrong_guess.count +=1
+	def win?(guesses)
+		guesses.each do |guess|
+			count_correct_guesses = 0
+			results = false 
+			if guess_letter(guess)
+				count_correct_guesses += 1
+				if count_correct_guesses = word.length
+					results true
+			else
+				false
+				end
+			end
+		end
+		results
+	end
 
-	# end
+	def lose?(guesses)
+		guesses.each do |guess|
+			count_incorrect_guesses = 0
+			results = false
 
-	# def guess(character)
-	# 	if character.nil? or /[^A-Za-z]/.match(character) != nil or character == ''
-	# 		raise ArgumentError.new("Not a valid letter")
-	# 	end
+			counter = 0
+				if letter_guess(guess) == false 
+					count_incorrect_guesses += 1
 
-	# 	if @guesses.include? character or @wrong_guess.include? character
-	# 		return false
-	# 	end
+				if count_incorrect_guesses == 6 
+					results = true 
+				end
+				end
+		end
+		results 
 
-	# 	if @word.include? character
-	# 		@guesses == @guesses + character
-	# 		return true
-	# 	else
-	# 		@wrong_guess = @wrong_guess + character
-	# 		return true
-	# 	end
-	# end
+	end
 
-	# def word_with_guesses
-	# 	@word.gsub(/[^#{@guesses}]/, '_')
-	# end
+	def guess_letter(letter)
 
-	# def check_win_or_lose
-	# 	if @wrong_guess.length >=7
-	# 		return :lose
-	# 	end
+		if word.include?(letter)
+			word.each_character.with_index do |value, position|
+				if value == letter 
+					@correct_guess[pos] = value
+				end
+			end
+		else
+			@wrong_guess += 1
+		end
 
-	# 	if word_with_guesses == @word 
-	# 		return :win
-	# 	end
+		
+	end
 
-	# 	:play
+
+
+
+
+
+# 	def guess(character)
+# 		if character.nil? or /[A-Za-z]/.match(character) != nil or character == ''
+# 			raise ArgumentError.new("Not a valid letter")
+# 		end
+
+# 		if @guesses.include? character or @wrong_guess.include? character
+# 			return false
+# 		end
+
+# 		if @word.include? character
+# 			@guesses == @guesses + character
+# 			return true
+# 		else
+# 			@wrong_guess = @wrong_guess + character
+# 			return true
+# 		end
+# 	end
+
+# 	def word_with_guesses
+# 		@word.gsub(/[^#{@guesses}]/, '_')
+# 	end
+
+# 	def check_win_or_lose
+# 		if @wrong_guess.length == 7 
+# 			return :lose
+# 		end
+
+# 		if word_with_guesses == @word 
+# 			return :win
+# 		end
 	
-end
+# end

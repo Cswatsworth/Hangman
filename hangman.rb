@@ -11,16 +11,16 @@ class KeywordClass
 	end
 
 	def store_word
-		store_word = Array.new(word.length, '_ ')
+		store_word = Array.new(secret_word.length, '_ ')
 	end
 
 	def valid_characters?
-		word[/[A-Za-z]+$/] == word
+		secret_word[/[A-Za-z]+/] == secret_word
 		
 	end
 
 	def guess_include(guess)
-		word.include?(guess)
+		secret_word.include?(guess)
 
 	end
 
@@ -30,7 +30,7 @@ class KeywordClass
 			results = false 
 			if guess_letter(guess)
 				count_correct_guesses += 1
-				if count_correct_guesses = word.length
+				if count_correct_guesses = secret_word.length
 					results true
 			else
 				false
@@ -60,18 +60,24 @@ class KeywordClass
 
 	def guess_letter(letter)
 
-		if word.include?(letter)
-			word.each_character.with_index do |value, position|
+		if secret_word.include?(letter)
+			secret_word.each_char.with_index do |value, position|
 				if value == letter 
-					@correct_guess[pos] = value
+					@correct_guess[position] = value
 				end
 			end
 		else
-			@wrong_guess += 1
+			@wrong_guess -= 1
 		end
 
 		
 	end
+
+	def position(guess)
+		word_array = secret_word.chars
+		index_array = word_array.each_index.select{|i| word_array[i] == guess}
+	end
+end
 
 
 

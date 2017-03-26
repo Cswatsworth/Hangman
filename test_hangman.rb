@@ -30,13 +30,25 @@ class TestHangman < MiniTest::Test
 
 	 def test_guess_wrong
 	 	word = KeywordClass.new('code')
-	 	guess = 'a'
-	 	assert_equal(false, word.guess_letter(guess))
+	 	letter = 'a'
+	 	assert_equal(false, word.guess_include(letter))
 	 end
 
 	 def test_guess_correct_letter
 	 	word = KeywordClass.new('code')
 	 	guess = 'a'
-	 	assert_equal(false, word.guess_letter(guess))
+	 	assert_equal(false, word.guess_include(guess))
+	 end
+
+	 def test_counter_for_incorrect_guess
+	 	word = KeywordClass.new('code')
+	 	guess = 'a'
+	 	assert_equal(5, word.guess_letter(guess))
+	 end
+
+	 def test_position_for_guessed_letter
+	 	word = KeywordClass.new('code')
+	 	guess = 'd'
+	 	assert_equal([2], word.position(guess))
 	 end
 end
